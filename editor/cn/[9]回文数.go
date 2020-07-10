@@ -27,7 +27,7 @@
 package cn
 
 //leetcode submit region begin(Prohibit modification and deletion)
-func isPalindrome(x int) bool {
+func isPalindromeArray(x int) bool {
 	if x < 0 {
 		return false
 	}

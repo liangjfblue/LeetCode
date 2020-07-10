@@ -30,12 +30,45 @@ package cn
  *     Next *ListNode
  * }
  */
+/**
+思路:
+1.获取链表长度n, 计算出需要移动的步长 k%n
+2.快慢指针, 快指针先走k%n
+3.然后快慢指针一起走, 直至快指针为nil, 此时慢指针指向的后半段就是需要挪到前面的, 改变指针指向即可
+*/
 func rotateRight(head *ListNode, k int) *ListNode {
-	if k == 0 {
+	if head == nil || k == 0 {
 		return head
 	}
 
-	return
+	var fast, slow = head, head
+
+	sum := 0
+	for fast != nil {
+		sum++
+		fast = fast.Next
+	}
+
+	//真正移动的距离
+	k %= sum
+
+	//快指针先走k步
+	fast = head
+	for k > 0 {
+		k--
+		fast = fast.Next
+	}
+
+	for fast.Next != nil {
+		fast = fast.Next
+		slow = slow.Next
+	}
+
+	fast.Next = head
+	head = slow.Next
+	slow.Next = nil
+
+	return head
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
