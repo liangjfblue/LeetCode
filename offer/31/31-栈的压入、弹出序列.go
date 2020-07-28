@@ -31,6 +31,22 @@ pushed 是 popped 的排列。
 */
 package _1
 
+//加多一个辅助栈, 把pushed压栈,
+//一边压栈一边和popped当前元素对比,
+//如果相等那么就pop出pushed栈顶元素, 并且popped后移一位,
+//满足条件是最终位移和popped长度一致
 func validateStackSequences(pushed []int, popped []int) bool {
+	popIndex := 0
+	popLen := len(popped)
+	stack := make([]int, 0)
 
+	for _, v := range pushed {
+		stack = append(stack, v)
+		for popIndex < popLen && len(stack) > 0 && stack[len(stack)-1] == popped[popIndex] {
+			stack = stack[:len(stack)-1]
+			popIndex++
+		}
+	}
+
+	return popIndex == popLen
 }

@@ -15,8 +15,8 @@ func mirrorTree(root *model.TreeNode) *model.TreeNode {
 
 	for len(queue) > 0 {
 		//pop queue
-		node := queue[len(queue)-1]
-		queue = queue[:len(queue)-1]
+		node := queue[0]
+		queue = queue[1:]
 
 		if node == nil {
 			continue
