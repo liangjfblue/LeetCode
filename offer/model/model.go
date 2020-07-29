@@ -18,3 +18,12 @@ type TreeNode struct {
 	Left  *TreeNode
 	Right *TreeNode
 }
+
+/**
+ * Definition for a Node.
+ */
+type Node struct {
+	Val    int
+	Next   *Node
+	Random *Node
+}
