@@ -23,5 +23,20 @@ s = ""
 package _0
 
 func firstUniqChar(s string) byte {
+	if s == "" {
+		return byte(' ')
+	}
 
+	c := make([]int, 26)
+
+	for i := 0; i < len(s); i++ {
+		c[s[i]-'a']++
+	}
+
+	for i := 0; i < len(s); i++ {
+		if c[s[i]-'a'] == 1 {
+			return s[i]
+		}
+	}
+	return byte(' ')
 }
