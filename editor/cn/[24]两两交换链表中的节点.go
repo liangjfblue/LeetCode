@@ -29,30 +29,34 @@ func swapPairs(head *ListNode) *ListNode {
 	/**
 	思路:递归返回是返回交换好的子链表的头结点, 递归结束条件是最后一对交换, 递归操作是交换节点(前节点指向交换好的子链表, 后节点指向前节点)
 	*/
-	//var p2 = head.Next
-	//
-	//head.Next = swapPairs(p2.Next)
-	//p2.Next = head
-	//
-	//return p2
+	//需要交换的两个节点
+	n1 := head
+	n2 := head.Next
+
+	//n1.Next连接子链表
+	n1.Next = swapPairs(n2.Next)
+	//后节点指向前节点
+	n2.Next = n1
+
+	return n2
 
 	//迭代
 	/**
 	思路:三指针法, cur一直指向即将交换的前一个节点, p1,p2指向交换的两个节点, 一直双双交换直至最后一对交换结束
 	*/
-	var newHead = head.Next
-	var cur, p1, p2 = head, head, head.Next
-	for head != nil && head.Next != nil {
-		p1, p2 = head, head.Next
-
-		cur.Next = p2
-		p1.Next = p2.Next
-		p2.Next = p1
-
-		cur = p1
-		head = p1.Next
-	}
-	return newHead
+	//var newHead = head.Next
+	//var cur, p1, p2 = head, head, head.Next
+	//for head != nil && head.Next != nil {
+	//	p1, p2 = head, head.Next
+	//
+	//	cur.Next = p2
+	//	p1.Next = p2.Next
+	//	p2.Next = p1
+	//
+	//	cur = p1
+	//	head = p1.Next
+	//}
+	//return newHead
 }
 
 //leetcode submit region end(Prohibit modification and deletion)

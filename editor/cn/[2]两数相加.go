@@ -23,46 +23,46 @@ package cn
  * }
  */
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil && l2 == nil {
-		return nil
-	} else if l1 == nil && l2 != nil {
-		return l2
-	} else if l1 != nil && l2 == nil {
-		return l1
-	}
-
-	carry := 0
-	head := new(ListNode)
-	var cur = head
-
-	//只要任意链表不为空, 或者有进位就继续
-	for l1 != nil || l2 != nil || carry == 1 {
-		if l1 != nil {
-			cur.Val += l1.Val
-		}
-		if l2 != nil {
-			cur.Val += l2.Val
-		}
-		cur.Val += carry
-
-		carry = cur.Val / 10
-		cur.Val = cur.Val % 10
-
-		if l1 != nil {
-			l1 = l1.Next
-		}
-		if l2 != nil {
-			l2 = l2.Next
+	flag := 0
+	h := new(ListNode)
+	p := h
+	p1, p2 := l1, l2
+	v1, v2 := 0, 0
+	for p1 != nil || p2 != nil {
+		v1, v2 = 0, 0
+		if p1 != nil {
+			v1 = p1.Val
 		}
 
-		//防止最后一次new
-		if l1 != nil || l2 != nil || carry == 1 {
-			cur.Next = new(ListNode)
-			cur = cur.Next
+		if p2 != nil {
+			v2 = p2.Val
+		}
+
+		sum := v1 + v2 + flag
+		flag = sum / 10
+		sum %= 10
+
+		p.Next = &ListNode{
+			Val: sum,
+		}
+		p = p.Next
+
+		if p1 != nil {
+			p1 = p1.Next
+		}
+
+		if p2 != nil {
+			p2 = p2.Next
 		}
 	}
 
-	return head
+	if flag == 1 {
+		p.Next = &ListNode{
+			Val: 1,
+		}
+	}
+
+	return h.Next
 }
 
 //leetcode submit region end(Prohibit modification and deletion)

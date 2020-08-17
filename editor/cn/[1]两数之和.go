@@ -20,22 +20,20 @@ package cn
 */
 func twoSum(nums []int, target int) []int {
 	var (
-		ret  = make([]int, 2)
-		temp = make(map[int]int, len(nums))
+		val = make(map[int]int)
 	)
 
-	for index, value := range nums {
-		temp[value] = index
-	}
+	for k, v := range nums {
+		if _, ok := val[v]; !ok {
+			val[v] = k
+		}
 
-	for index1, value := range nums {
-		if index2, ok := temp[target-value]; ok && index1 != index2 {
-			ret[0], ret[1] = index1, index2
-			return ret
+		if idx, ok := val[target-v]; ok && idx != k {
+			return []int{idx, k}
 		}
 	}
 
-	return ret
+	return nil
 }
 
 //leetcode submit region end(Prohibit modification and deletion)

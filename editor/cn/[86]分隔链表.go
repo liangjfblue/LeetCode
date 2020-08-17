@@ -20,19 +20,24 @@ package cn
  * }
  */
 func partition(head *ListNode, x int) *ListNode {
+	if head == nil {
+		return head
+	}
+
+	p := head
 	greatDummy := &ListNode{}
 	lessDummy := &ListNode{}
 	currGreat := greatDummy
 	currLess := lessDummy
-	for head != nil {
-		if head.Val < x {
-			currLess.Next = head
-			currLess = head
+	for p != nil {
+		if p.Val < x {
+			currLess.Next = p
+			currLess = p
 		} else {
-			currGreat.Next = head
-			currGreat = head
+			currGreat.Next = p
+			currGreat = p
 		}
-		head = head.Next
+		p = p.Next
 	}
 	currGreat.Next = nil
 	currLess.Next = greatDummy.Next

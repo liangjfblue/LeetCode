@@ -59,13 +59,18 @@ func rotateRight(head *ListNode, k int) *ListNode {
 		fast = fast.Next
 	}
 
+	//输入: 1->2->3->4->5->NULL, k = 2
+	//输出: 4->5->1->2->3->NULL
 	for fast.Next != nil {
 		fast = fast.Next
 		slow = slow.Next
 	}
 
+	//快指针指向原来的头
 	fast.Next = head
+	//慢指针的下一个节点更新为头
 	head = slow.Next
+	//更新慢指针的next为nil
 	slow.Next = nil
 
 	return head
